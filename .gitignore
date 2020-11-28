@@ -60,4 +60,6 @@ poker.payments/incoming.log
 poker.payments/.env
 scripts/vagrant/game_server/install_files/GeoLite2-Country.tar.gz
 scripts/vagrant/game_server/ubuntu-bionic-18.04-cloudimg-console.log
+scripts/vagrant/payment_server/ovpn_tcp/*
+scripts/vagrant/payment_server/ovpn_udp/*
 doc/

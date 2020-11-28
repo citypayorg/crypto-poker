@@ -37,18 +37,22 @@ Prerequisites
 
 Getting Started
 
+cd ~/ctppoker/
+
 1) Run the client
 ```
-cd poker.ui
+cd ~/ctppoker/poker.ui
 npm i
 au run -w
 ```
+cd ~/ctppoker/poker.ui
+au run -w
 
 *note, the client must be compiled prior to compiling the server due to shared class definitions*
 
 2) Run the server
 ```
-cd poker.engine
+cd ~/ctppoker/poker.engine
 npm i
 tsc
 cp ../scripts/vagrant/game_server/install_files/game_server.env ./build/poker.engine/.env

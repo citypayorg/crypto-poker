@@ -14,5 +14,6 @@
         "**/dist*/**":true,
         "poker.admin.ui.angular/dist/":true,
     },
-    "workbench.editor.enablePreview": false
+    "workbench.editor.enablePreview": false,
+    "git.ignoreLimitWarning": true
 }
