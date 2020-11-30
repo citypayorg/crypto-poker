@@ -9,7 +9,24 @@ sudo dpkg -i mongodb-compass_1.23.0_amd64.deb
 mongodb-compass
 mongodb://admin:pass@localhost:27017
 ---------------------------------------------------------------------------
+https://yuddomack.tistory.com/entry/%EC%B2%98%EC%9D%8C%EB%B6%80%ED%84%B0-%EC%8B%9C%EC%9E%91%ED%95%98%EB%8A%94-EC2-ubuntu-mongodb-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0
 
+echo "mongodb-org hold" | sudo dpkg --set-selections
+echo "mongodb-org-server hold" | sudo dpkg --set-selections
+echo "mongodb-org-shell hold" | sudo dpkg --set-selections
+echo "mongodb-org-mongos hold" | sudo dpkg --set-selections
+echo "mongodb-org-tools hold" | sudo dpkg --set-selections
+sudo service mongod start 
+
+sudo dpkg -i mongodb-org-server_4.0.21_amd64.deb
+curl -fsSL https://www.mongodb.org/static/pgp/server-4.0.21.asc | sudo apt-key add -
+---------------------------------------------------------------------------
+############### 2020-11-30  ###############
+cd ~/ctppoker/poker.engine
+npm uninstall mongodb
+ and install
+npm install mongodb@2.2.23 --save
+###########################################
 1. MongoDB 설치하기
 1. 공개키 가져오기
 
@@ -136,3 +153,26 @@ mongo -u admin -p password --authenticationDatabase admin
 
 `use admin`
 `db.createUser({user:"his001", pwd:"password", roles:[{role:"dbOwner", db:"writeapp"}]});`
+
+
+
+
+
+mongodb://localhost:27017'
+
+출처: https://preamtree.tistory.com/109 [Preamtree의 행복로그]
+var MongoClient = require('mongodb').MongoClient;
+var db; // 연결 받아올 변수(중요)
+ 
+function connectDB() {
+    var databaseUrl = 'mongodb://localhost:27017/local';
+     
+    MongoClient.connect(databaseUrl, function(err, database) {
+        if(err) throw err;
+         
+        console.log('데이터베이스에 연결됨: '+databaseUrl);
+        db = database.db('local'); /*database명을 명시했다.*/
+    });
+}
+
+
