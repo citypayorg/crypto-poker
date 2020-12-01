@@ -85,3 +85,9 @@ npm test
 Credits:
 
 Thank you to [mdashx](https://github.com/mdashx) for [the inspiration](https://github.com/mdashx/pangea-poker-frontend) and the use of the background table images, cards and animation logic.
+
+
+curl "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Country&license_key=vP65qsGQCxfewnTs&suffix=tar.gz" -o GeoLite2-Country.tar.gz \
+  && tar -xzvf GeoLite2-Country.tar.gz \
+  && mv GeoLite2-Country_*/GeoLite2-Country.mmdb /home/dev/ctppoker/poker.engine/build/poker.engine/GeoLite2-Country.mmdb
+  
