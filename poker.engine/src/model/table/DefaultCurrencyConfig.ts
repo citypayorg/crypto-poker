@@ -3,7 +3,7 @@ import { CurrencyConfig } from "../CurrencyConfig";
 
 const configs: CurrencyConfig[] = [
    { 
-    "name" : "dash",
+    "name" : "ctp",
     "minimumWithdrawl" : "0.001",
     "requiredNumberOfConfirmations" : 1,
     "contractAddress" : null,

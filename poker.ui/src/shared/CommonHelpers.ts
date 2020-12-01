@@ -25,8 +25,9 @@ export class CommonHelpers  {
       }
 
     public static getTxHashLink(txHash:string, currency:string){
-      if(currency==Currency.dash){
-        return `https://chainz.cryptoid.info/dash/tx.dws?${txHash}.htm`;
+      if(currency==Currency.ctp){
+        // return `https://chainz.cryptoid.info/dash/tx.dws?${txHash}.htm`;
+        return `http://exp.citypay.org/tx/?${txHash}`;
       }else if(currency==Currency.eth || currency=='ukg'|| currency=='chp'){
         return `https://etherscan.io/tx/${txHash}`;
       }else if(currency==Currency.btc){

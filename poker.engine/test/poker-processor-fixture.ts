@@ -63,7 +63,7 @@ describe('#PokerProcessor()', function() {
     let user = new User();
     let accounts:Account[] = [];
     accounts.push(new Account(Currency.free, 1000));
-    accounts.push(new Account(Currency.dash, 5123456));
+    accounts.push(new Account(Currency.ctp, 5123456));
     for(let account of accounts){
       account.updateIndex = 0;
     }
@@ -79,7 +79,7 @@ describe('#PokerProcessor()', function() {
   it('should return tables from repository', function() {
       processor.dataRepository.getExchangeRate = (base: string) => {
         let exchangeRate: ExchangeRate;
-        if (base.toLowerCase() === "dash") {
+        if (base.toLowerCase() === "ctp") {
           exchangeRate = new ExchangeRate();
           exchangeRate.price = 190.43589233;
         }
@@ -193,7 +193,7 @@ describe('#PokerProcessor()', function() {
     let joinTableResult = new JoinTableResult();
     joinTableResult.success = true;
 
-    let tableTmp = new Table(new TableConfig("table2", 1, 2, Currency.dash, "id2"));
+    let tableTmp = new Table(new TableConfig("table2", 1, 2, Currency.ctp, "id2"));
     tableTmp.sendTableProcessorMessage = (message:TableProcessorMessage):Promise<TableProcessorResult> => { return null };
     tableTmp.validateJoinTable = (req: any) => { return joinTableResult };
     let table = substitute.for(tableTmp);    
@@ -219,7 +219,7 @@ describe('#PokerProcessor()', function() {
     assert.equal(tMessage.joinTableRequest.seat, 1);
     assert.equal(tMessage.joinTableRequest.stack, 5123456);    
 
-    dataRepositorySub.receivedWith('updateUserAccount', 'guid1', Currency.dash, -joinTableRequest.amount, 0);
+    dataRepositorySub.receivedWith('updateUserAccount', 'guid1', Currency.ctp, -joinTableRequest.amount, 0);
   }
     );
 
@@ -228,7 +228,7 @@ describe('#PokerProcessor()', function() {
     let user = new User();
     
     processor.dataRepository.getUser = (guid: string) => { return Promise.resolve(user); }
-    let table = substitute.for(new Table(new TableConfig("table2", 1, 2, Currency.dash, "id2")));    
+    let table = substitute.for(new Table(new TableConfig("table2", 1, 2, Currency.ctp, "id2")));    
     table.validateJoinTable = (req: any) => { return new JoinTableResult() };
     processor.addTable(table);
     let socket = new MockWebSocket();
@@ -250,9 +250,9 @@ describe('#PokerProcessor()', function() {
 
   it('request stack size exceeds player balance', async ()=> {
 
-    let account = new Account(Currency.dash, 1000);
+    let account = new Account(Currency.ctp, 1000);
     processor.dataRepository.getUserAccount = (guid: string, currency: string) => { return Promise.resolve(account); }
-    let table = substitute.for(new Table(new TableConfig("table2", 1, 2, Currency.dash, "id2")));    
+    let table = substitute.for(new Table(new TableConfig("table2", 1, 2, Currency.ctp, "id2")));    
     table.validateJoinTable = (req: any) => { return new JoinTableResult() };
     processor.addTable(table);
     
@@ -274,9 +274,9 @@ describe('#PokerProcessor()', function() {
   });
 
   it('non integer request amount', async ()=> {
-    processor.dataRepository.getUserAccount = (guid: string, currency: string) => { return Promise.resolve(new Account(Currency.dash, 1000)); }    
+    processor.dataRepository.getUserAccount = (guid: string, currency: string) => { return Promise.resolve(new Account(Currency.ctp, 1000)); }    
     
-    processor.addTable(new Table(new TableConfig("table2", 1, 2, Currency.dash, "id2")));
+    processor.addTable(new Table(new TableConfig("table2", 1, 2, Currency.ctp, "id2")));
 
     let socket = new MockWebSocket();
     await processor.connection(socket, httpIncomingRequest);
@@ -297,8 +297,8 @@ describe('#PokerProcessor()', function() {
 
   it('non integer request amount2', async ()=> {
     
-    processor.dataRepository.getUserAccount = (guid: string, currency: string) => { return Promise.resolve(new Account(Currency.dash, 1000)); }    
-        processor.addTable(new Table(new TableConfig("table2", 1, 2, Currency.dash, "id2")));
+    processor.dataRepository.getUserAccount = (guid: string, currency: string) => { return Promise.resolve(new Account(Currency.ctp, 1000)); }    
+        processor.addTable(new Table(new TableConfig("table2", 1, 2, Currency.ctp, "id2")));
     
         let socket = new MockWebSocket();
         await processor.connection(socket, httpIncomingRequest);
@@ -510,7 +510,7 @@ describe('#PokerProcessor()', function() {
     await processor.connection(socket, httpIncomingRequest);    
     let message1 = new ClientMessage();
     message1.accountWithdrawlRequest = new AccountWithdrawlRequest();
-    message1.accountWithdrawlRequest.currency = Currency.dash;
+    message1.accountWithdrawlRequest.currency = Currency.ctp;
     processor.clients[0].user = null;
    
     let err:string;
@@ -524,7 +524,7 @@ describe('#PokerProcessor()', function() {
     processor.clients[0].user = user;
     let message2 = new ClientMessage();
     message2.accountWithdrawlRequest = new AccountWithdrawlRequest();
-    message2.accountWithdrawlRequest.currency = Currency.dash;
+    message2.accountWithdrawlRequest.currency = Currency.ctp;
     
 
     await processor.logAndEnqueue(processor.clients[0], message2);
@@ -544,12 +544,13 @@ describe('#PokerProcessor()', function() {
       await processor.connection(socket, httpIncomingRequest);
       let message1 = new ClientMessage();
       message1.accountWithdrawlRequest = new AccountWithdrawlRequest();
-      message1.accountWithdrawlRequest.currency = 'dash';
+      // message1.accountWithdrawlRequest.currency = 'dash';
+      message1.accountWithdrawlRequest.currency = 'ctp';
       message1.accountWithdrawlRequest.receivingAddress = 'address1';
       message1.accountWithdrawlRequest.amount = '1000000';
    
     let [err, data] = await to(processor.logAndEnqueue(processor.clients[0], message1))    
-    assert.equal(err, 'Error: updateUserAccount: expecting update to exactly 1 document instead {"nModified":0} for player: ABCDEF accountWithdrawlRequest: {"currency":"dash","receivingAddress":"address1","amount":"1000000"}');
+    assert.equal(err, 'Error: updateUserAccount: expecting update to exactly 1 document instead {"nModified":0} for player: ABCDEF accountWithdrawlRequest: {"currency":"ctp","receivingAddress":"address1","amount":"1000000"}');
     
   });
 
@@ -562,7 +563,8 @@ describe('#PokerProcessor()', function() {
       await processor.connection(socket, httpIncomingRequest);
       let message1 = new ClientMessage();
       message1.accountWithdrawlRequest = new AccountWithdrawlRequest();
-      message1.accountWithdrawlRequest.currency = 'dash';
+      // message1.accountWithdrawlRequest.currency = 'dash';
+      message1.accountWithdrawlRequest.currency = 'ctp';
       message1.accountWithdrawlRequest.receivingAddress = 'address1';
       message1.accountWithdrawlRequest.amount = '1000000';
 
@@ -576,7 +578,7 @@ describe('#PokerProcessor()', function() {
         return false;
       }));
       
-      dataRepositorySub.receivedWith('updateUserAccount', 'ABCDEF', Currency.dash, -1000000, 0);
+      dataRepositorySub.receivedWith('updateUserAccount', 'ABCDEF', Currency.ctp, -1000000, 0);
 
       
 

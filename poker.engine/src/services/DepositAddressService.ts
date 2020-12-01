@@ -14,7 +14,7 @@ export class DepositAddressService implements IDepositAddressService{
     
     async getAddress(currency: string, xpub:string, index: number): Promise<string> {
 
-        if(currency==Currency.dash){
+        if(currency==Currency.ctp){
             return DashDepositAddressService.genAddr(xpub, index);
         }else if(currency==Currency.eth){
             return EthDepositAddressService.genAddr(xpub, index);

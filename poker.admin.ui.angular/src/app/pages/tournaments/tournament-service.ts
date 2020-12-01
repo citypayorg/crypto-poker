@@ -15,7 +15,8 @@ export class TournamentService {
             let view = new TournmanetView();    
             view._id =`507f1f77bcf86cd79943901${i+1}`;
             view.name =  `Friday Freeroll ${i+1}`;
-            view.currency = 'dash';
+            // view.currency = 'dash';
+            view.currency = 'ctp';
             view.startTime = new Date(new Date().getTime() + (1*60*60*1000)).toISOString();
             view.prizes = ['0.2','0.09','0.05','0.02','0.01','0.01','0.01','0.01','0.01','0.01'];
             view.startingChips = 1000;

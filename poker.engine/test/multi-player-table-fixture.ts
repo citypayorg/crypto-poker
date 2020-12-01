@@ -1034,7 +1034,7 @@ describe('multi-player-table-fixture', ()=> {
 
   it('player_with_less_than_0_01_usd_is_skipped_and_cards_are_dealt', () => {
     setup3PlayerGame();        
-    table.tableConfig.currency = Currency.dash;
+    table.tableConfig.currency = Currency.ctp;
     table.currencyUnit = 100000000;
     table.tableConfig.smallBlind = 15107;
     table.tableConfig.exchangeRate = 330.98;
@@ -1056,7 +1056,7 @@ describe('multi-player-table-fixture', ()=> {
 
   it('player_with_stack_less_than_big_blind_is_not_skipped', () => {
     setup3PlayerGame();        
-    table.tableConfig.currency = Currency.dash;
+    table.tableConfig.currency = Currency.ctp;
     table.currencyUnit = 100000000;
     table.tableConfig.smallBlind = 15107;
     table.tableConfig.exchangeRate = 330.98;

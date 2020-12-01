@@ -58,14 +58,14 @@ export class DashTxController{
         }
         if(this.logJson){
           this.index++;
-          fs.writeFile(`dash_gettransaction_${txid}_${this.index}.json`, JSON.stringify(data), (err: any) => {
+          fs.writeFile(`ctp_gettransaction_${txid}_${this.index}.json`, JSON.stringify(data), (err: any) => {
             if (err) { logger.error(err); };
           });
         }
         
         if (data.result) {
           let tx:DashTx = <DashTx>data.result;
-          let currencyConfig:CurrencyConfig = await this.dataRepository.getCurrencyConfig(Currency.dash);
+          let currencyConfig:CurrencyConfig = await this.dataRepository.getCurrencyConfig(Currency.ctp);
           let masterAccountPublic:string = currencyConfig.masterAccount != null ? currencyConfig.masterAccount.public : '';
           
           let detail = tx.details.find(d=>d.category=='receive' && d.address==masterAccountPublic);
@@ -96,7 +96,7 @@ export class DashTxController{
           if (detail.category === "receive") {
             let info = await this.dataRepository.getAddressInfoByAddress(address);
             if (info) {
-              let amount = new Decimal(tx.amount).mul(CurrencyUnit.getCurrencyUnit(Currency.dash)).toString();
+              let amount = new Decimal(tx.amount).mul(CurrencyUnit.getCurrencyUnit(Currency.ctp)).toString();
               let event: IncomingPaymentEvent = new IncomingPaymentEvent(info.address, amount, tx.confirmations, tx.txid);
               event.instantlock = tx.instantlock;
               if (event.instantlock) {
@@ -129,7 +129,7 @@ export class DashTxController{
       }
 
       async checkSend(tx:DashTx, address:string) : Promise<void>{
-        const payment = await this.dataRepository.getPaymentByTxId(Currency.dash, tx.txid);
+        const payment = await this.dataRepository.getPaymentByTxId(Currency.ctp, tx.txid);
         if (payment) {
           logger.info(`DashTxController category send txid: ${tx.txid} for ${address}. payment: ${payment._id.toString()}`);
         } else {

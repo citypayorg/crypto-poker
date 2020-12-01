@@ -33,7 +33,7 @@ export class TestHelpers {
 
   public static getDataRepository(): IDataRepository{
     let dataRepository:any = TestHelpers.getSubstitute(IDataRepository);
-    dataRepository.returns('getTablesConfig', Promise.resolve([new TableConfig("table1", 0.1, 0.2, "dash", "id1"), new TableConfig("table2", 0.1, 0.2, "usd", "id1")]));
+    dataRepository.returns('getTablesConfig', Promise.resolve([new TableConfig("table1", 0.1, 0.2, "ctp", "id1"), new TableConfig("table2", 0.1, 0.2, "usd", "id1")]));
 
     let user = new User();
     user.guid = "ABCDEF";

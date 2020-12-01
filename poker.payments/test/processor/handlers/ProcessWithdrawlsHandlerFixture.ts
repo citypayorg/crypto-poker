@@ -29,7 +29,7 @@ describe('ProcessWithdrawlsHandler', ()=>{
     let connectionToGameServer:ISubstitute<IConnectionToGameServer>;
     let http:ISubstitute<IHttp>;
     let currencyConfig = new CurrencyConfig();
-    currencyConfig.name = 'dash'
+    currencyConfig.name = 'ctp'
     currencyConfig.processingDelayMin = 20;
     currencyConfig.withdrawlLimitPerMin = 10;
     currencyConfig.withdrawlLimitNumber = 3;
@@ -69,7 +69,7 @@ describe('ProcessWithdrawlsHandler', ()=>{
         assert.equal(Math.round(diff1), currencyConfig.processingDelayMin)
         assert.equal(args1.status, PaymentStatus.pending)
         assert.equal(args1.type, PaymentType.outgoing)
-        assert.equal(args1.currency, 'dash')       
+        assert.equal(args1.currency, 'ctp')
     }
 
     let assertPaymentsCall = () => {
@@ -84,7 +84,7 @@ describe('ProcessWithdrawlsHandler', ()=>{
             assert.equal(Math.round(diff2), currencyConfig.withdrawlLimitPerMin)
             assert.equal(args2.status, PaymentStatus.complete)
             assert.equal(args2.type, PaymentType.outgoing)
-            assert.equal(args2.currency, 'dash')  
+            assert.equal(args2.currency, 'ctp')
         }
              
     }

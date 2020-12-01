@@ -30,8 +30,8 @@ describe('#DataRepository()', function () {
     if (dbTables.length == 0) {
       let table1 = new TableConfig('Free Table 1', 1, 2, Currency.free.toUpperCase());
       let table2 = new TableConfig('Free Table 2', 1, 2, Currency.free.toUpperCase());
-      let table3 = new TableConfig('Sit n Go 1', 0.1, 0.2, Currency.dash.toUpperCase());
-      let table4 = new TableConfig('Sit n Go 2', 0.05, 0.1, Currency.dash.toUpperCase());
+      let table3 = new TableConfig('Sit n Go 1', 0.1, 0.2, Currency.ctp.toUpperCase());
+      let table4 = new TableConfig('Sit n Go 2', 0.05, 0.1, Currency.ctp.toUpperCase());
       return collection.insertMany([
           table1, table2, table3, table4
       ]);
@@ -152,60 +152,60 @@ describe('#DataRepository()', function () {
     
     await setup;
     await repository.updateUserAccount("guid-1", Currency.free, 1)
-    await repository.updateUserAccount("guid-1", Currency.dash, 2)
+    await repository.updateUserAccount("guid-1", Currency.ctp, 2)
         
     await repository.updateUserAccount("guid-2", Currency.free, 3)
-    await repository.updateUserAccount("guid-2", Currency.dash, 4)
+    await repository.updateUserAccount("guid-2", Currency.ctp, 4)
     await repository.updateUserAccount("guid-2", Currency.bcy, 5)
         
-    let data = await repository.updateUserAccount("guid-2", 'DASH', 6)
+    let data = await repository.updateUserAccount("guid-2", 'CTP', 6)
     assert.equal(data.result.nModified, 1);
     let accounts1 = await repository.getUserAccounts("guid-1");
     assert.equal(accounts1.length, 2);
     assert.equal(accounts1.find(a=>a.currency==Currency.free).balance, 1);
-    assert.equal(accounts1.find(a=>a.currency==Currency.dash).balance, 2);
+    assert.equal(accounts1.find(a=>a.currency==Currency.ctp).balance, 2);
     
     let accounts2 = await repository.getUserAccounts("guid-2");    
     assert.equal(accounts2.length, 3);
     assert.equal(accounts2.find(a=>a.currency==Currency.free).balance, 3);
-    assert.equal(accounts2.find(a=>a.currency==Currency.dash).balance, 10);
+    assert.equal(accounts2.find(a=>a.currency==Currency.ctp).balance, 10);
     assert.equal(accounts2.find(a=>a.currency==Currency.bcy).balance, 5);    
   });
 
   it('updateUserAccount where account does not exist', async ()=>{
     await setup;
-    let data = await repository.updateUserAccount('guid1', 'DASH', 6)
+    let data = await repository.updateUserAccount('guid1', 'CTP', 6)
     
     assert.equal(data.result.n, 1);
     assert.equal(data.result.nModified, 0);
     //console.log('data', data.result)
 
-    let account = await repository.getUserAccount('guid1', 'DASH')
+    let account = await repository.getUserAccount('guid1', 'CTP')
     assert.equal(account.guid, 'guid1')
-    assert.equal(account.currency, 'dash')
+    assert.equal(account.currency, 'ctp')
     assert.equal(account.balance, 6)
   })
 
   it('updateUserAccount where account exists', async ()=>{
     await setup;
-    await repository.updateUserAccount('guid1', 'DASH', 2000000)
+    await repository.updateUserAccount('guid1', 'CTP', 2000000)
     
-    let data = await repository.updateUserAccount('guid1', 'DASH', 3123456)
+    let data = await repository.updateUserAccount('guid1', 'CTP', 3123456)
     assert.equal(data.result.n, 1);
     assert.equal(data.result.nModified, 1);
-    let account = await repository.getUserAccount('guid1', 'DASH')
+    let account = await repository.getUserAccount('guid1', 'CTP')
     assert.equal(account.guid, 'guid1')
-    assert.equal(account.currency, 'dash')
+    assert.equal(account.currency, 'ctp')
     assert.equal(account.balance, 5123456)
   })
 
   it('decrement player balance', async ()=>{
     await setup;
-    await repository.updateUserAccount('guid1', Currency.dash, 2000000)
+    await repository.updateUserAccount('guid1', Currency.ctp, 2000000)
 
-    let result = await repository.updateUserAccount('guid1', Currency.dash, -500000, 0)
+    let result = await repository.updateUserAccount('guid1', Currency.ctp, -500000, 0)
         
-    let account = await repository.getUserAccount('guid1', 'DASH')
+    let account = await repository.getUserAccount('guid1', 'CTP')
     assert.equal(account.balance, 1500000)
 })
 
@@ -225,23 +225,23 @@ describe('#DataRepository()', function () {
   it('updateUserAccount race condition', async () => {
     let guid = 'guid-1';
     await setup;    
-    await repository.updateUserAccount(guid, Currency.dash, 100000000)    
+    await repository.updateUserAccount(guid, Currency.ctp, 100000000)    
 
     //fetch user twice representing different processes
-    let dbAccount1 = await repository.getUserAccount(guid, Currency.dash);
-    let dbAccount2 = await repository.getUserAccount(guid, Currency.dash);    
+    let dbAccount1 = await repository.getUserAccount(guid, Currency.ctp);
+    let dbAccount2 = await repository.getUserAccount(guid, Currency.ctp);    
 
-    await repository.updateUserAccount(guid, Currency.dash, -1, dbAccount1.updateIndex)
+    await repository.updateUserAccount(guid, Currency.ctp, -1, dbAccount1.updateIndex)
 
     let error: string;
     try {
-      await repository.updateUserAccount(guid, Currency.dash, -2, dbAccount1.updateIndex)
+      await repository.updateUserAccount(guid, Currency.ctp, -2, dbAccount1.updateIndex)
     } catch (e) {
       error = e;
     }
     assert.equal(error, 'Error: expecting modified count of 1 instead it is 0')
 
-    let finalAccount = await repository.getUserAccount(guid, Currency.dash);
+    let finalAccount = await repository.getUserAccount(guid, Currency.ctp);
     assert.equal(finalAccount.balance, 99999999)
     let accounts = await repository.getUserAccounts(guid);
     assert.equal(accounts.length, 1)

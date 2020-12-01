@@ -33,7 +33,7 @@ export class TransferFundsRequestHandler extends AbstractMessageHandler<Transfer
     let accountBalance = 0;
     let account: Account;
     if (user != null) {
-      account = await this.dataRepository.getUserAccount(user.guid, Currency.dash);
+      account = await this.dataRepository.getUserAccount(user.guid, Currency.ctp);
       if (account != null)
         accountBalance = account.balance;
     }

@@ -17,11 +17,8 @@ export class Simulations {
 
   constructor(private ea: EventAggregator) {  }
   test() {
-     //let tableConfig = { name: "table 1", smallBlind: 29552, smallBlindUsd: 0.1, bigBlind: 59104	, bigBlindUsd: 0.2, currency: 'dash', _id: 'id1', exchangeRate: 1, timeToActSec: 10, maxBuyIn: 10000000 }
-     //tableConfig.exchangeRate = 338.38657282079047103410936654034;
-    
     let row1 = this.getTableViewRow(Currency.free, 'table1', 'id1');
-    let row2 = this.getTableViewRow('dash', 'table2', 'id2');
+    let row2 = this.getTableViewRow('ctp', 'table2', 'id2');
     let row3 = this.getTableViewRow('btc', 'table3', 'id3');
     let row4 = this.getTableViewRow('eth', 'table4', 'id4');
     let userData = new UserData();
@@ -29,7 +26,6 @@ export class Simulations {
     userData.initialData=true;
     userData.guid = 'guid1';
     userData.accounts.push(new Account1('usd', 1000));
-    //userData.accounts.push(new Account1('dash', 30000000));
     this.sendMessage({ user: userData });    
     this.sendMessage({ tableConfigs: [ row1, row2, row3, row4 ] });
     let subscribeTableResult:SubscribeTableResult = new SubscribeTableResult();
@@ -99,7 +95,7 @@ export class Simulations {
       message.paymentHistoryResult.payments.push(<PaymentHistoryRowView>{
         timestamp: new Date().toISOString(),
         type: Math.random() < 0.5 ? 'outgoing':'incoming',
-        currency: 'dash',
+        currency: 'ctp',
         amount: '1000000',
         status: confs === 1 ? 'complete':'pending',
         confirmations: confs,
@@ -113,14 +109,14 @@ export class Simulations {
   }
   sendTournamentResult(): any {
     let message = new DataContainer();
-    message.tournamentResult = new TournamentResultView('id1', 'Friday Freeroll', 4, "0.01", "dash", false);    
+    message.tournamentResult = new TournamentResultView('id1', 'Friday Freeroll', 4, "0.01", "ctp", false);    
     this.sendMessage(message);    
   }
 
   sendTournamentSubscriptionResult(){
     let message = new DataContainer();
     message.tournamentSubscriptionResult = new TournamentSubscriptionResult();
-    message.tournamentSubscriptionResult.tournaments.push( <TournamentViewRow>{ status: 1,  id:"5aa724aed855ec4e100b70f3", "name":"Friday Freeroll","currency":"dash","startTime":"2018-06-04T23:44:34.826Z","totalPrize":"0.42", "playerCount":0 });
+    message.tournamentSubscriptionResult.tournaments.push( <TournamentViewRow>{ status: 1,  id:"5aa724aed855ec4e100b70f3", "name":"Friday Freeroll","currency":"ctp","startTime":"2018-06-04T23:44:34.826Z","totalPrize":"0.42", "playerCount":0 });
     this.sendMessage(message);    
   }
 
@@ -146,7 +142,7 @@ export class Simulations {
 
     let userData = new UserData();
     userData.accounts.push(new Account1('usd', 999));
-    userData.accounts.push(new Account1('dash', 30000000));
+    userData.accounts.push(new Account1('ctp', 30000000));
 
     this.sendMessage( { loginResult: result, user: userData});
   }
@@ -173,7 +169,7 @@ export class Simulations {
       this.sendMessage({ transferFundsResult: {
         success: true,
         errorMessage: '',
-        currency: 'dash',
+        currency: 'ctp',
         amount: 0.03,
         screenName: 'bob'
       } });
@@ -254,7 +250,7 @@ export class Simulations {
 
   sendCashOutRequest() {
     let result = new CashOutRequestResult();
-    let currencies = [ "dash", "eth", "btc"];
+    let currencies = [ "ctp", "eth", "btc"];
     for(let currency of currencies){
       let account = new CashOutAccount();
       account.currency = currency;
@@ -270,7 +266,7 @@ export class Simulations {
   }
 
   sendCashOutCompleted() {
-    let successEvent = { accountWithdrawlResult: { success: true, currency: 'dash', fees: 20000, sentAmount: 9512345, balance: 0, errorMessage: "", txHash: "0x8619eb919a1f0fa154d51886749bdc1342a42155394793649534dfc2d809f3da", txHashLink:"https://etherscan.io/tx/${result.txHash}" } };
+    let successEvent = { accountWithdrawlResult: { success: true, currency: 'ctp', fees: 20000, sentAmount: 9512345, balance: 0, errorMessage: "", txHash: "0x8619eb919a1f0fa154d51886749bdc1342a42155394793649534dfc2d809f3da", txHashLink:"https://etherscan.io/tx/${result.txHash}" } };
     let errorEvent = { accountWithdrawlResult: { success: false, fees: 0, sentAmount: 0, balance: 0, errorMessage: "a big long error message here", txHash: "" } };
     this.sendMessage(successEvent);
   }
@@ -284,8 +280,7 @@ export class Simulations {
 
   sendAccountFunded() {
     setTimeout(() => {
-      //let data = { accountFunded: { balance: 1000, currency: "USD", paymentReceived:1000 } };
-      let data = { accountFunded: { balance: 50000000, currency: "DASH", paymentReceived: 50000000 } };
+      let data = { accountFunded: { balance: 50000000, currency: "CTP", paymentReceived: 50000000 } };
       this.sendMessage(data);
     }, 1500);
   }
@@ -330,8 +325,6 @@ export class Simulations {
     
      let balance = 64987;
      let currency = 'btc';
-    //let balance = 5000000;
-    //let currency = 'dash';
     setTimeout(() => {
       let result = new FundAccountResult();
       result.currency= currency;

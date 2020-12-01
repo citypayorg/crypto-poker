@@ -37,7 +37,8 @@ describe('serialization-fixture', () => {
     dc.user.screenName = 'wal';
     dc.user.initialData = true;
     dc.user.activated = true;
-    dc.user.accounts.push(<Account>{ currency:'dash', balance:3000000 }, <Account>{ currency:'dash', balance:877.66});
+    // dc.user.accounts.push(<Account>{ currency:'dash', balance:3000000 }, <Account>{ currency:'dash', balance:877.66});
+    dc.user.accounts.push(<Account>{ currency:'ctp', balance:3000000 }, <Account>{ currency:'ctp', balance:877.66});
     dc.user.notifyUserStatus = false;
     dc.user.muteSounds = true;
     
@@ -208,13 +209,14 @@ describe('serialization-fixture', () => {
     dc.forgotResult.success = true
     dc.forgotResult.message = 'message'
 
-    dc.tournamentResult = new TournamentResultView('id1', 'tournamentName', 11, "0.01", "dash", true);    
+    dc.tournamentResult = new TournamentResultView('id1', 'tournamentName', 11, "0.01", "ctp", true);    
 
     dc.paymentHistoryResult = new PaymentHistoryResult();
     let paymentHistoryRowView = new PaymentHistoryRowView();
     paymentHistoryRowView.amount = '1.23'
     paymentHistoryRowView.confirmations = 1;
-    paymentHistoryRowView.currency = 'dash'
+    // paymentHistoryRowView.currency = 'dash'
+    paymentHistoryRowView.currency = 'ctp'
     paymentHistoryRowView.requiredConfirmations = 2;
     paymentHistoryRowView.status = 'pending'
     paymentHistoryRowView.timestamp = new Date().toISOString();
@@ -307,7 +309,8 @@ describe('serialization-fixture', () => {
     message.bet.tableId = 'tableId';
     message.bet.amount = 30000000;
 
-    message.fundAccountRequest = new FundAccountRequest('dash');
+    // message.fundAccountRequest = new FundAccountRequest('dash');
+    message.fundAccountRequest = new FundAccountRequest('ctp');
 
     message.accountWithdrawlRequest = new AccountWithdrawlRequest();
     message.accountWithdrawlRequest.currency = 'currency'

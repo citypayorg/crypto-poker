@@ -13,7 +13,7 @@ body {
 }
 .nav-logo{
     background:url($cdn + 'images/logo.png') no-repeat;
-    width: 340px;
+    width: 50px;
     height: 50px;
     margin-top: -12px;
     display: inline-block;
@@ -1255,6 +1255,9 @@ ux-dialog {
   display: inline-block;
   vertical-align: middle;
 }
+.currency-ctp {
+  background-image: url($cdn + 'images/ctp.png');    
+}
 .currency-dash {
     background-image: url($cdn + 'images/dash.png');    
   }
@@ -1449,12 +1452,23 @@ ux-dialog {
 .cashOutSummary-txHash{
   font-size: 0.8em;
 }
+.ctp-logo-header {    
+  background: url($cdn + 'images/ctp_logo_with_name.png');
+  height: 20px;
+  width:99px;
+  display: inline-block;
+}
 .dash-logo-header {    
   background: url($cdn + 'images/dash_logo_with_name.png');
   height: 20px;
   width:99px;
   display: inline-block;
 }
+.nav-ctp-icon {
+  content: url($cdn + 'images/ctp.png');
+  vertical-align: -20%;
+}
+
 .nav-dash-icon {
     content: url($cdn + 'images/dash.png');
     vertical-align: -20%;

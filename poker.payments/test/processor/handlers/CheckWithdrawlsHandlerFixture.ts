@@ -43,7 +43,7 @@ describe('CheckWithdrawlsHandler', ()=>{
         payment.type = PaymentType.outgoing;      
         payment.screenName = 'john'  
         payment.amount = '1000000';
-        payment.currency = 'dash'  
+        payment.currency = 'ctp'  
         payment.status = PaymentStatus.pending;
         telegramService.callsThrough('sendTelegram')
         dataRepository.callsThrough('getCurrencyConfig')
@@ -61,7 +61,7 @@ describe('CheckWithdrawlsHandler', ()=>{
         assert.equal(dbPayment.status, PaymentStatus.pending);
 
         let telegram = telegramService.argsForCall('sendTelegram', 0)[0];
-        assert.equal(telegram, 'Received new withdrawl (pending) from john for 0.01 dash. Processing delay:30 min')
+        assert.equal(telegram, 'Received new withdrawl (pending) from john for 0.01 ctp. Processing delay:30 min')
     })
 
     it('large payment is flagged', async () => {
@@ -77,7 +77,7 @@ describe('CheckWithdrawlsHandler', ()=>{
         assert.equal(dbPayment.status, PaymentStatus.flagged);
 
         let telegram = telegramService.argsForCall('sendTelegram', 0)[0];
-        assert.equal(telegram, 'Received new withdrawl (flagged) from john for 0.5 dash.')
+        assert.equal(telegram, 'Received new withdrawl (flagged) from john for 0.5 ctp.')
     })
 
     it('internal transfer is not processed', async () => {

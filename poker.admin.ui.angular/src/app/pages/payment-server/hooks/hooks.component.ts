@@ -22,7 +22,7 @@ export class HooksComponent implements OnInit {
   apiToken: string = 'b44865eb69aa4d1abbbffed567e26e75';
   deleting:boolean = false;
   currency: string = 'btc';
-  currencies: string[] = ['dash', 'bcy', 'eth', 'btc', 'beth'];
+  currencies: string[] = ['ctp', 'bcy', 'eth', 'btc', 'beth']; //'dash'
   loading: boolean;
   baseUrl = 'https://api.blockcypher.com/';
 

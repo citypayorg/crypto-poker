@@ -1,6 +1,6 @@
 export class Currency {
     public static free: string = 'usd';
-    public static dash: string = 'dash';
+    public static ctp: string = 'ctp';
     public static bcy: string = 'bcy';
     public static eth: string = 'eth';
     public static beth: string = 'beth';
@@ -12,7 +12,7 @@ export class Currency {
 
   export class CurrencyUnit {
     public static free: number = 100;
-    public static dash: number = 100000000;
+    public static ctp: number = 100000000;
     public static bcy: number = 100000000;
     //public static eth: number = 1000000000000000000;
     public static eth: number = 100000000;

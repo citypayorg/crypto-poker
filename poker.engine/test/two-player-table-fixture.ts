@@ -795,7 +795,7 @@ describe('two-player-table-fixture', function () {
     setup2PlayerGame();
     let dataRepository = <any>TestHelpers.getDataRepository();
     table.tableConfig.rake = 1.5;
-    table.tableConfig.currency = Currency.dash;
+    table.tableConfig.currency = Currency.ctp;
     table.dataRepository = dataRepository;
     table.currentPlayers[0].stack = 603939;
     table.currentPlayers[0].setBet(575180);
@@ -911,7 +911,7 @@ describe('two-player-table-fixture', function () {
     setup2PlayerGame();
     let dataRepository = <any>TestHelpers.getDataRepository();
     
-    table.tableConfig.currency = Currency.dash;
+    table.tableConfig.currency = Currency.ctp;
     table.currencyUnit = 100000000;
     table.tableConfig.exchangeRate = 995.619;
     table.tableConfig.smallBlind = 5022;    

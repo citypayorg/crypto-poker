@@ -69,7 +69,7 @@ describe('TournamentLogic', () => {
 
 
     beforeEach(()=> {
-        userAccount = new Account('dash', 3000000);
+        userAccount = new Account('ctp', 3000000);
         let ptpSub = {
             tables: <Table[]> [],
 
@@ -116,7 +116,7 @@ describe('TournamentLogic', () => {
         tournament3.timeToActSec = 30;        
         tournament3.awardPrizesAfterMinutes = 1;
         tournament3.prizes = ['0.5', '0.25', '0.10', '0.05', '0.04', '0.03', '0.02', '0.01'];
-        tournament3.currency = 'dash';
+        tournament3.currency = 'ctp';
         tournament3.rebuyForMin = 60;
         tournament3.rebuyAmount = '0.01';
 
@@ -615,7 +615,7 @@ describe('TournamentLogic', () => {
         let tournamentResult= lastMessage.tournamentResult;
         assert.equal(tournamentResult.placing, 7);
         assert.equal(tournamentResult.tournamentName, 'tournament3');
-        assert.equal(tournamentResult.currency, 'dash');
+        assert.equal(tournamentResult.currency, 'ctp');
         assert.equal(tournamentResult.rebuyAmount, null);
         
     });
@@ -631,7 +631,7 @@ describe('TournamentLogic', () => {
         let tournamentResult= lastMessage.tournamentResult;
         assert.equal(tournamentResult.placing, 7);
         assert.equal(tournamentResult.tournamentName, 'tournament3');
-        assert.equal(tournamentResult.currency, 'dash');
+        assert.equal(tournamentResult.currency, 'ctp');
         assert.equal(tournamentResult.rebuyAmount, '0.01');
     });
 
@@ -684,7 +684,7 @@ describe('TournamentLogic', () => {
         await handler.startTournament(tournament3, [users[0], users[1]], registrations);
         
         let user = users[users.length-1];
-        userAccount = new Account('dash', 0);
+        userAccount = new Account('ctp', 0);
         userAccount.updateIndex = 0;
 
         await handler.rebuy(tournament3._id, user);
@@ -705,7 +705,7 @@ describe('TournamentLogic', () => {
         }
         let subscriber = subscribers[subscribers.length - 1];
         let user = users[users.length-1];
-        userAccount = new Account('dash', 10000000);
+        userAccount = new Account('ctp', 10000000);
         userAccount.updateIndex = 0;
         registrations.find(r=>r.userGuid==subscriber.user.guid).rebuyCount=1;
 
@@ -713,14 +713,14 @@ describe('TournamentLogic', () => {
 
         let updateUserAccountArgs = dataRepository.argsForCall('updateUserAccount', 0);
         assert.equal(updateUserAccountArgs[0], user.guid)
-        assert.equal(updateUserAccountArgs[1], 'dash')
+        assert.equal(updateUserAccountArgs[1], 'ctp')
         assert.equal(updateUserAccountArgs[2], -2000000)
         assert.equal(updateUserAccountArgs[3], 0)
 
         let payment = <Payment>dataRepository.argsForCall('savePayment', 0)[0];
         assert.equal(payment.type, PaymentType.outgoing)
         assert.equal(payment.amount, '2000000')
-        assert.equal(payment.currency, 'dash')
+        assert.equal(payment.currency, 'ctp')
         assert.equal(payment.guid, user.guid)
         assert.equal(payment.status, PaymentStatus.complete)
         assert.equal(payment.isTournamentRebuy, true)

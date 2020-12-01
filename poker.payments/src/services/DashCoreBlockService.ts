@@ -12,7 +12,7 @@ var fs = require('fs');
 
 export class DashCoreBlockService implements IBlockChainService {
   
-  currency: string = Currency.dash;
+  currency: string = Currency.ctp;
     
   constructor(private dataRepository:ISecureDataRepository){
 
@@ -28,10 +28,10 @@ export class DashCoreBlockService implements IBlockChainService {
 
   async checkMissingAddresses()  : Promise<void> {
     const walletCount = await this.getColdAddressCount();    
-    const dbCount = await this.dataRepository.getAddressCount(Currency.dash);
+    const dbCount = await this.dataRepository.getAddressCount(Currency.ctp);
     if(dbCount !== walletCount){
-      const dbAddresses:AddressInfo[] = await this.dataRepository.getAddressesByCurrency(Currency.dash);
-      let currencyConfig = await this.dataRepository.getCurrencyConfig(Currency.dash);
+      const dbAddresses:AddressInfo[] = await this.dataRepository.getAddressesByCurrency(Currency.ctp);
+      let currencyConfig = await this.dataRepository.getCurrencyConfig(Currency.ctp);
       for(let info of dbAddresses){
         let addr = DashDepositAddressService.getAddress(currencyConfig.xpub, info.index);
         await this.importpubkey(addr.publicKey, info.index);
@@ -72,14 +72,14 @@ export class DashCoreBlockService implements IBlockChainService {
       
 
   async monitorAddress(info: AddressInfo): Promise<void> {
-    let currencyConfig = await this.dataRepository.getCurrencyConfig(Currency.dash);
+    let currencyConfig = await this.dataRepository.getCurrencyConfig(Currency.ctp);
     let addr = DashDepositAddressService.getAddress(currencyConfig.xpub, info.index);
     await this.importpubkey(addr.publicKey, info.index);
   }
 
 
   async newTransaction(currency: string, receivingAddress: string, balance: number, userGuid:string): Promise<TransactionResult> {
-    let amount= balance / CurrencyUnit.getCurrencyUnit(Currency.dash);
+    let amount= balance / CurrencyUnit.getCurrencyUnit(Currency.ctp);
     let post_data = { "method": "sendtoaddress", "params": [receivingAddress, amount, userGuid, "", false] };
     let result = new TransactionResult();
     let [err,data] = await to(this.unlockWallet())
@@ -162,7 +162,7 @@ export class DashCoreBlockService implements IBlockChainService {
 
  async deriveAddress(index:number) : Promise<any> {
   //let pubKey = new HDPublicKey('xpub661MyMwAqRbcF8dQCNnr92GPFUCsjQs5EwKjh8rzkuDGNarXvSNHKSL3iv94kwqVfhmRNMnFXQpEeZK7crNuotMe46vfX2PXV7iVAWdwTcX');  
-  let currencyConfig = await this.dataRepository.getCurrencyConfig(Currency.dash);
+  let currencyConfig = await this.dataRepository.getCurrencyConfig(Currency.ctp);
   let pubKey = new HDPublicKey(currencyConfig.xpub);
   let account1 = pubKey.derive(0);
   let addr = account1.derive(index);    

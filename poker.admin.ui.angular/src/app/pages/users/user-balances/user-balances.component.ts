@@ -24,7 +24,8 @@ export class UserBalancesComponent implements OnInit {
     this.apiService.getCurrencies()
     .subscribe(data => {
       this.currencies.push(...data);
-      this.currency = 'dash';
+      // this.currency = 'dash';
+      this.currency = 'ctp';
       //this.fetch();
     }, 
     (e) => this.errorMessage = e);

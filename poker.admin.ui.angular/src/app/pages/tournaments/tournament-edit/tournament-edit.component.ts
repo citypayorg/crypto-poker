@@ -177,7 +177,8 @@ export class TournamentEditComponent implements OnInit {
   getDefaultTournament(): TournmanetView {
     let view = new TournmanetView();
     view.name = 'Sunday Tournament';
-    view.currency = 'dash';
+    // view.currency = 'dash';
+    view.currency = 'ctp';
     view.startTime = new Date(new Date().getTime() + (1 * 60 * 60 * 1000)).toISOString();
     view.prizes = ['0.5', '0.25', '0.10', '0.05', '0.04', '0.03', '0.02', '0.01'];
     view.startingChips = 1000;

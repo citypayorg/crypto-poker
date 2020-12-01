@@ -123,8 +123,10 @@ export class PaymentsComponent implements OnInit {
       return `https://etherscan.io/tx/${txHash}`;
     }else if(currency=='btc'){
       return `https://www.blockchain.com/btc/tx/${txHash}`;
-    }
-    return txHash;
+    }else if(currency=='ctp'){
+    return `http://http://exp.citypay.org/tx/?${txHash}`;
+  }
+  return txHash;
   }
 
   // testData(){

@@ -31,9 +31,21 @@ Technical Setup Instructions
 Prerequisites
 * node v10 or later
 * mongodb
+############### 2020-11-30  ###############
+cd ~/ctppoker/poker.engine
+npm uninstall mongodb
+ and install
+npm install mongodb@2.2.23 --save
+service mongod start
+systemctl enable mongod.service
+
+###########################################
+
 * typescript (`sudo npm i typescript -g`)
 * aurelia (`sudo npm install aurelia-cli@0.34.0 -g`)
 * `npm install --global --production windows-build-tools` (windows only)
+
+/home/dev/ctppoker/scripts/vagrant/game_server/install.sh
 
 Getting Started
 
@@ -57,12 +69,15 @@ npm i
 tsc
 cp ../scripts/vagrant/game_server/install_files/game_server.env ./build/poker.engine/.env
 cd ./build/poker.engine
+
+service mongod start
+cd ~/ctppoker/poker.engine/build/poker.engine
 node ./src/app.js
 ```
 
 There are also ~300 unit tests for the engine.
 ```
-cd poker.engine
+cd ~/ctppoker/poker.engine
 npm test
 ```
 
