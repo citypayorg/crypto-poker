@@ -96,3 +96,7 @@ Thank you to [mdashx](https://github.com/mdashx) for [the inspiration](https://g
     https://min-api.cryptocompare.com/data/pricemultifull?fsyms=DASH&tsyms=USD
 
 /home/dev/ctppoker/poker.engine/src/model/table/DefaultCurrencyConfig.ts
+
+
+cd ~/ctpexe
+./ctp-qt

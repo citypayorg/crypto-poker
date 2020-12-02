@@ -37,7 +37,8 @@ export class WebServer {
         app.use(cors({origin: '*'}));
         app.use(bodyParser.json());
         app.use(expressValidator());// Form validation - This line must be immediately after bodyParser
-        const port: number = 8113;
+        // const port: number = 8113;
+        const port: number = 39998;
 
         app.use('/deposit-addresses', new DepositAddressesController(this.dataRepository).router);
         app.use('/dashd-tx-callback', new DashTxController(this.dataRepository, this.processor, new DashCoreBlockService(this.dataRepository)).router);
