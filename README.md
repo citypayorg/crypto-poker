@@ -64,11 +64,14 @@ au run -w
 
 2) Run the server
 ```
+service mongod start
 cd ~/ctppoker/poker.engine
 npm i
 tsc
 cp ../scripts/vagrant/game_server/install_files/game_server.env ./build/poker.engine/.env
 cd ./build/poker.engine
+node ./src/app.js
+
 
 service mongod start
 cd ~/ctppoker/poker.engine/build/poker.engine
@@ -85,3 +88,11 @@ npm test
 Credits:
 
 Thank you to [mdashx](https://github.com/mdashx) for [the inspiration](https://github.com/mdashx/pangea-poker-frontend) and the use of the background table images, cards and animation logic.
+
+
+//////////////////////
+/ctppoker/poker.engine/src/services/ExchangeRatesService.ts
+    https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${currencyQuery}&tsyms=USD
+    https://min-api.cryptocompare.com/data/pricemultifull?fsyms=DASH&tsyms=USD
+
+/home/dev/ctppoker/poker.engine/src/model/table/DefaultCurrencyConfig.ts
