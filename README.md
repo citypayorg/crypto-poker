@@ -138,19 +138,6 @@ dev@ubuntu:~/ctpexe$ ./ctp-cli getnewaddress
 XfWCYRKf5fWRe5VWijp4B78814fE2omTLG
 
 ./ctp-cli validateaddress XvmbHrxQdjeHyYPAR45oVV3Qeno9vKRKfz
-{
-  "isvalid": true,
-  "address": "XvmbHrxQdjeHyYPAR45oVV3Qeno9vKRKfz",
-  "scriptPubKey": "76a914dc487502fdc0584119073d9e824e8ab714ba2c5088ac",
-  "ismine": true,
-  "iswatchonly": false,
-  "isscript": false,
-  "pubkey": "0372284f0a8afc0fdf84e306524b5c96bb9eb226a1fe71c191108b9d7ca422f0ca",
-  "iscompressed": true,
-  "account": "",
-  "timestamp": 1607049389
-}
-
 ./ctp-cli validateaddress XoPS2EYctqhCTEEvpJtmuw5zpjNJ2ycASX
 {
   "isvalid": true,
@@ -164,25 +151,14 @@ XfWCYRKf5fWRe5VWijp4B78814fE2omTLG
   "account": "",
   "timestamp": 1607049389
 }
-
 ./ctp-cli validateaddress XfWCYRKf5fWRe5VWijp4B78814fE2omTLG
-{
-  "isvalid": true,
-  "address": "XfWCYRKf5fWRe5VWijp4B78814fE2omTLG",
-  "scriptPubKey": "76a91434d5574accaf985742f7c7b6dfc33b31e0a2714b88ac",
-  "ismine": true,
-  "iswatchonly": false,
-  "isscript": false,
-  "pubkey": "03c65cef9ee597c66ef5251ddee13c7c86328a2f36e9fe158168ce87a7f4b73961",
-  "iscompressed": true,
-  "account": "",
-  "timestamp": 1607049389
-}
 
-./ctp-cli validateaddress XvmbHrxQdjeHyYPAR45oVV3Qeno9vKRKfz
 
 ---------------------------------------------------------------------
 =======
 curl "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Country&license_key=vP65qsGQCxfewnTs&suffix=tar.gz" -o GeoLite2-Country.tar.gz \
   && tar -xzvf GeoLite2-Country.tar.gz \
   && mv GeoLite2-Country_*/GeoLite2-Country.mmdb /home/dev/ctppoker/poker.engine/build/poker.engine/GeoLite2-Country.mmdb
+============
+xpub about ruby
+https://gist.github.com/nmarley/506a3d3036d55c878696
