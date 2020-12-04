@@ -129,19 +129,7 @@ curl --user ctplinuxdev1 --data-binary '{"jsonrpc": "1.0", "id":"ctplinuxdev1", 
 currencyConfig.masterAccount.public = "XvmbHrxQdjeHyYPAR45oVV3Qeno9vKRKfz";
 ---------------------------------------------------------------------
 ./ctp-cli getwalletinfo
-{
-  "walletversion": 61000,
-  "balance": 35.99999582,
-  "privatesend_balance": 0.00000000,
-  "unconfirmed_balance": 0.00000000,
-  "immature_balance": 100.00000000,
-  "txcount": 9,
-  "keypoololdest": 1607049389,
-  "keypoolsize": 999,
-  "keys_left": 997,
-  "unlocked_until": 0,
-  "paytxfee": 0.00000000
-}
+XpkYdHNjkKVJAhdrYJRmjgaLY9z78TA13d -->
 dev@ubuntu:~/ctpexe$ ./ctp-cli getnewaddress
 XvmbHrxQdjeHyYPAR45oVV3Qeno9vKRKfz
 dev@ubuntu:~/ctpexe$ ./ctp-cli getnewaddress
@@ -191,12 +179,10 @@ XfWCYRKf5fWRe5VWijp4B78814fE2omTLG
   "timestamp": 1607049389
 }
 
+./ctp-cli validateaddress XvmbHrxQdjeHyYPAR45oVV3Qeno9vKRKfz
+
 ---------------------------------------------------------------------
-=======
 =======
 curl "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Country&license_key=vP65qsGQCxfewnTs&suffix=tar.gz" -o GeoLite2-Country.tar.gz \
   && tar -xzvf GeoLite2-Country.tar.gz \
   && mv GeoLite2-Country_*/GeoLite2-Country.mmdb /home/dev/ctppoker/poker.engine/build/poker.engine/GeoLite2-Country.mmdb
-  
->>>>>>> ba47d907fa0884a483393efd545552f3928f3b5a
->>>>>>> 483e2dbe854b1885032e082e70d83c49437a6d6d
