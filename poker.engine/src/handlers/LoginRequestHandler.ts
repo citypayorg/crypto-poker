@@ -45,7 +45,9 @@ export class LoginRequestHandler extends AbstractMessageHandler<LoginRequest> {
 
     async handleLoginRequest(request: LoginRequest, user: User) {
         let result = new LoginResult();
-
+        console.log('/home/dev/ctppoker/poker.engine/src/handlers/LoginRequestHandler.ts handleLoginRequest ') //####delete####
+        console.log(request.email) //####delete####
+        console.log(request.password) //####delete####
 
         let errorMessage: string;
         if (user && !user.disabled) {

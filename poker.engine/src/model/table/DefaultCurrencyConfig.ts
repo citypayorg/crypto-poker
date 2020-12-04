@@ -9,13 +9,13 @@ const configs: CurrencyConfig[] = [
 //     "requiredNumberOfConfirmations" : 10,
 //     "contractAddress" : "0xf3db7560E820834658B590C96234c333Cd3D5E5e"
 // },
-{
-    "name" : "btc",
-    "minimumWithdrawl" : "0.0001",
-    "requiredNumberOfConfirmations" : 1,
-    "contractAddress" : "",
-    "xpub" : "ypub6YAxCsNq3En9toXTqvNBBkSh9RMeJxzpEZ6wB7EVGfXDsgDErYqAk6otTghhPnJ8uifhWQozhzpdiX4MXDnkwWyKf5GDCw7m8vajuKrLZwr"
-}
+// {
+//     "name" : "btc",
+//     "minimumWithdrawl" : "0.0001",
+//     "requiredNumberOfConfirmations" : 1,
+//     "contractAddress" : "",
+//     "xpub" : "ypub6YAxCsNq3En9toXTqvNBBkSh9RMeJxzpEZ6wB7EVGfXDsgDErYqAk6otTghhPnJ8uifhWQozhzpdiX4MXDnkwWyKf5GDCw7m8vajuKrLZwr"
+// }
 // ,
 // {
 //     "name" : "eth",
