@@ -66,3 +66,4 @@ doc/
 scripts/vagrant/payment_server/install_files/ctp.conf
 scripts/vagrant/game_server/install_files/game_server.env
 scripts/vagrant/game_server/install_files/game_server.env
+scripts/vagrant/payment_server/install_files/dash.conf
